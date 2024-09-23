@@ -17,8 +17,6 @@ public class Bill {
   @GeneratedValue
   private Long cod_bill;
 
-  // private Long id_details;
-
   @OneToOne
   @JoinColumn(name = "id_pay", nullable = false)
   private Pay pay;
