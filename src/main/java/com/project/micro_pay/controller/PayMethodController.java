@@ -34,7 +34,7 @@ public class PayMethodController {
     return ResponseEntity.ok(payMethod);
   }
 
-  @PutMapping
+  @PutMapping("/{id}")
   public ResponseEntity<PayMethod> updatePayMethor(@PathVariable Long id, @RequestBody PayMethod dataPayMethod){
     PayMethod gPayMethod = payMethodService.getPayMethodId(id);
     if(gPayMethod == null) return ResponseEntity.notFound().build();

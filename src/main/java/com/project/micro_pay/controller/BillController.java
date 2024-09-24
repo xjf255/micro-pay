@@ -17,7 +17,7 @@ import com.project.micro_pay.model.Bill;
 import com.project.micro_pay.service.BillService;
 
 @RestController
-@RequestMapping
+@RequestMapping("api/bill")
 public class BillController {
 
   @Autowired

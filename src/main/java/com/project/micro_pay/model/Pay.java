@@ -10,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.ManyToAny;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,14 +34,14 @@ public class Pay {
 
   private Float amount;
 
-  @OneToMany
-  @JoinColumn(name = "id_coupon", nullable = false)
-  private Coupon coupon;
+  @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
+  private List<Coupon> coupon;
 
   @OneToOne
   @JoinColumn(name = "id_method", nullable = false)
   private PayMethod payMethod;
 
+  @ManyToMany
   @JoinTable(name = "pay_tax", joinColumns = @JoinColumn(name = "id_pay"), inverseJoinColumns = @JoinColumn(name = "id_tax"))
   private List<Tax> tax;
 
