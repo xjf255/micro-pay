@@ -3,10 +3,12 @@ package com.project.micro_pay.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.project.micro_pay.model.CouponUsed;
 import com.project.micro_pay.repository.CouponUsedRepository;
 
+@Service
 public class CouponUsedService {
   @Autowired
   private CouponUsedRepository couponUsedRepository;
