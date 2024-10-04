@@ -20,12 +20,14 @@ public class SwaggerConfig {
 	@Bean
 	public Docket apiDocket() {
 		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.project.micro_pay.controller"))
-				.paths(PathSelectors.any())
-				.build()
-				.apiInfo(getApiInfo())
-				;
+		.select()
+		.apis(RequestHandlerSelectors.any())
+		.paths(PathSelectors.any())
+		.build()
+		// .pathMapping("/grupo5")  // Establecer el mapeo cuándo se pase al servidor
+		// .useDefaultResponseMessages(false);
+		.pathMapping("/")  // Establecer el mapeo cuándo sea local
+		.apiInfo(getApiInfo());
 	}
 	
 	private ApiInfo getApiInfo() {

@@ -38,7 +38,7 @@ public class StatusController {
   @PutMapping("/{id}")
   public ResponseEntity<Status> updateStatusById(@PathVariable Long id, @RequestBody Status bodyStatus){
     Status status = statusService.getStatusId(id);
-    if(status == null) ResponseEntity.notFound().build();
+    if(status == null) return ResponseEntity.notFound().build();
     status.setName_status(bodyStatus.getName_status());
     status.setCoupon(bodyStatus.getCoupon());
     status.setPay(bodyStatus.getPay());

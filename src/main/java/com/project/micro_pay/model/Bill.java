@@ -1,5 +1,6 @@
 package com.project.micro_pay.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,4 +21,6 @@ public class Bill {
   @OneToOne
   @JoinColumn(name = "id_pay", nullable = false)
   private Pay pay;
+
+  private Integer idPedido;
 }

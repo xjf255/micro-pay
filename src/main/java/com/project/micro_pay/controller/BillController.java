@@ -40,6 +40,7 @@ public class BillController {
     Bill bill = billService.getBillId(id);
     if(bill == null) return ResponseEntity.notFound().build();
     bill.setPay(dataBill.getPay());
+    bill.setIdPedido(dataBill.getIdPedido());
     Bill newBill = billService.saveBill(bill);
     return ResponseEntity.ok(newBill);
   }
