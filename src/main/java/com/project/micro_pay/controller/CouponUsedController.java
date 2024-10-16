@@ -17,7 +17,7 @@ import com.project.micro_pay.model.CouponUsed;
 import com.project.micro_pay.service.CouponUsedService;
 
 @RestController
-@RequestMapping("/api/CouponUsed")
+@RequestMapping("/api/couponUsed")
 public class CouponUsedController {
   
   @Autowired

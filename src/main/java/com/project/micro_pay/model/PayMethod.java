@@ -1,7 +1,5 @@
 package com.project.micro_pay.model;
 
-import java.security.Timestamp;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,8 +23,6 @@ public class PayMethod {
   private String name;
 
   private Boolean active;
-
-  private Timestamp update_date;
 
   @OneToOne(mappedBy = "payMethod", cascade = CascadeType.ALL)
   @JsonIgnore

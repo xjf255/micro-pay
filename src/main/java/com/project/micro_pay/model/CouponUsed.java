@@ -1,6 +1,6 @@
 package com.project.micro_pay.model;
 
-import java.security.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,13 +21,13 @@ public class CouponUsed {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long codCouponUsed;
 
-  private Timestamp dateCouponUsed;
+  private LocalDateTime dateCouponUsed;
 
   @ManyToOne
   @JoinColumn(name = "id_pay", nullable = false)
   private Pay pay;
 
   @OneToOne
-  @JoinColumn(name = "id_coupon", nullable = false)
+  @JoinColumn(name = "coupon", nullable = false)
   private Coupon coupon;
 }

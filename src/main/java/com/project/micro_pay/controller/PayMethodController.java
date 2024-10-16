@@ -41,7 +41,6 @@ public class PayMethodController {
     gPayMethod.setActive(dataPayMethod.getActive());
     gPayMethod.setName(dataPayMethod.getName());
     gPayMethod.setPay(dataPayMethod.getPay());
-    gPayMethod.setUpdate_date(dataPayMethod.getUpdate_date());
     PayMethod newPayMethod = payMethodService.savePayMethod(gPayMethod);
     return ResponseEntity.ok(newPayMethod);
   }

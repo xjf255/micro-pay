@@ -23,6 +23,8 @@ public class Status {
   
   private String name_status;
 
+  private String entity;
+
   @OneToOne(mappedBy = "status", cascade = CascadeType.ALL)
   @JsonIgnore
   private Pay pay;

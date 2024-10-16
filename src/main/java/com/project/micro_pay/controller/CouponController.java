@@ -37,24 +37,19 @@ public class CouponController {
   }
 
   @PostMapping
-  public Coupon createCoupon(Coupon coupon){
+  public Coupon createCoupon(@RequestBody Coupon coupon){
     return couponService.saveCoupon(coupon);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Coupon> UpdateCouponById(@PathVariable Long id, @RequestBody Coupon dataCoupon){
-    Coupon coupon = couponService.getCouponId(id);
-    if(coupon == null){
-      return ResponseEntity.notFound().build();
-    }
-    coupon.setCod_coupon(dataCoupon.getCod_coupon());
-    coupon.setCouponUsed(dataCoupon.getCouponUsed());
-    coupon.setExpiration_date(dataCoupon.getExpiration_date());
-    coupon.setPay(dataCoupon.getPay());
-    coupon.setStatus(dataCoupon.getStatus());
-    coupon.setValue(dataCoupon.getValue());
-
-    Coupon updateCoupon = couponService.saveCoupon(coupon);
+  public ResponseEntity<Coupon> updateCouponById(@PathVariable Long id, @RequestBody Coupon dataCoupon){
+    Coupon gCoupon = couponService.getCouponId(id);
+    if(gCoupon == null) return ResponseEntity.notFound().build();
+    gCoupon.setCod_coupon(dataCoupon.getCod_coupon());
+    gCoupon.setExpiration_date(dataCoupon.getExpiration_date());
+    gCoupon.setStatus(dataCoupon.getStatus());
+    gCoupon.setValue(dataCoupon.getValue());
+    Coupon updateCoupon = couponService.saveCoupon(gCoupon);
     return ResponseEntity.ok(updateCoupon);
   }
 
