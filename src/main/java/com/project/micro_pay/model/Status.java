@@ -5,10 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,11 +25,11 @@ public class Status {
 
   private String entity;
 
-  @OneToOne(mappedBy = "status", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "status", cascade = CascadeType.ALL)
   @JsonIgnore
-  private Pay pay;
+  private List<Pay> pay;
 
-  @OneToOne(mappedBy = "status", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "status", cascade = CascadeType.ALL)
   @JsonIgnore
-  private Coupon coupon;
+  private List<Coupon> coupon;
 }

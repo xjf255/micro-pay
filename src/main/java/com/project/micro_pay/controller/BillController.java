@@ -39,7 +39,7 @@ public class BillController {
   public ResponseEntity<Bill> updateBill(@PathVariable Long id, @RequestBody Bill dataBill){
     Bill bill = billService.getBillId(id);
     if(bill == null) return ResponseEntity.notFound().build();
-    bill.setPay(dataBill.getPay());
+    bill.setIdPay(dataBill.getIdPay());
     bill.setIdPedido(dataBill.getIdPedido());
     Bill newBill = billService.saveBill(bill);
     return ResponseEntity.ok(newBill);

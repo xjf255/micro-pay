@@ -9,9 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,40 +22,40 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name = "pay")
 public class Pay {
   // Hay que especificar el ID
   @Id
-  // Especifica como se generara el ID
-  // pero en este caso como es incrementable
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id_pay;
 
   private Float amount;
 
   @OneToOne
-  @JoinColumn(name = "pay", nullable = true)
+  @JoinColumn(name = "id_coupon", nullable = true)
   private Coupon coupon;
 
   @OneToOne
-  @JoinColumn(name = "id_method", nullable = false)
+  @JoinColumn(name = "cod_method", nullable = false)
   private PayMethod payMethod;
 
   @OneToOne
-  @JoinColumn(name = "tax", nullable = true)
+  @JoinColumn(name = "cod_tax", nullable = true)
   private Tax tax;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "id_status", nullable = false)
   private Status status;
 
   private Float total_amount;
+
   private LocalDate date_pay;
 
   @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
   @JsonIgnore
   private List<CouponUsed> couponUsed;
 
-  @OneToOne(mappedBy = "pay", cascade = CascadeType.ALL)
+  @OneToOne(mappedBy = "idPay", cascade = CascadeType.ALL)
   @JsonIgnore
   private Bill bill;
 }

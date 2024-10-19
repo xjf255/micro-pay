@@ -21,7 +21,7 @@ public class Bill {
 
   @OneToOne
   @JoinColumn(name = "id_pay", nullable = false)
-  private Pay pay;
+  private Pay idPay;
 
   private Integer idPedido;
 }

@@ -23,21 +23,23 @@ public class PayController {
   private PayService payService;
 
   @GetMapping
-  public List<Pay> getAllPays(){
+  public List<Pay> getAllPays() {
     return payService.getAll();
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Pay> getPayById(@PathVariable Long id){
+  public ResponseEntity<Pay> getPayById(@PathVariable Long id) {
     Pay pay = payService.getPayById(id);
-    if(pay == null) return ResponseEntity.notFound().build();
+    if (pay == null)
+      return ResponseEntity.notFound().build();
     return ResponseEntity.ok(pay);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Pay> updatePayById(@PathVariable Long id, @RequestBody Pay dataPay){
+  public ResponseEntity<Pay> updatePayById(@PathVariable Long id, @RequestBody Pay dataPay) {
     Pay pay = payService.getPayById(id);
-    if(pay == null) return ResponseEntity.notFound().build();
+    if (pay == null)
+      return ResponseEntity.notFound().build();
     pay.setAmount(dataPay.getAmount());
     pay.setBill(dataPay.getBill());
     pay.setCoupon(dataPay.getCoupon());
@@ -48,18 +50,19 @@ public class PayController {
     pay.setTax(dataPay.getTax());
     pay.setTotal_amount(dataPay.getTotal_amount());
     Pay newPay = payService.savePay(pay);
-    return ResponseEntity.ok(newPay); 
+    return ResponseEntity.ok(newPay);
   }
 
-  @PostMapping
-  public Pay createPay(@RequestBody Pay pay){
+  @PostMapping()
+  public Pay createPay(@RequestBody Pay pay) {
     return payService.savePay(pay);
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deletePay(@PathVariable Long id){
+  public ResponseEntity<Void> deletePay(@PathVariable Long id) {
     Pay pay = payService.getPayById(id);
-    if(pay == null) return ResponseEntity.notFound().build();
+    if (pay == null)
+      return ResponseEntity.notFound().build();
     payService.deletePay(id);
     return ResponseEntity.noContent().build();
   }

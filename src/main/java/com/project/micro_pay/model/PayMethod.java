@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,10 +16,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name = "paymethod")
 public class PayMethod {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long cod_Method;
+  private Long codMethod;
 
   private String name;
 
