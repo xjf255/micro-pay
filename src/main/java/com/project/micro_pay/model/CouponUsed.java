@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +25,7 @@ public class CouponUsed {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long codCouponUsed;
 
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private LocalDateTime dateCouponUsed;
 
   @ManyToOne

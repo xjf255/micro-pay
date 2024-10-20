@@ -1,5 +1,6 @@
 package com.project.micro_pay.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,21 +21,33 @@ public class PayService {
 
   private void handleCoupon(Pay pay) {
     if (pay.getCoupon() != null && pay.getCoupon().getId_coupon() != null) {
-      final Long idCoupon = 5L;
+      final Long statusCoupon = 5L;
       Coupon coupon = pay.getCoupon();
-      payRepository.changeStatus(coupon.getId_coupon(), idCoupon);
+      payRepository.changeStatus(coupon.getId_coupon(), statusCoupon);
       LocalDateTime now = LocalDateTime.now();
       payRepository.insertCouponUsed(pay.getId_pay(), coupon.getId_coupon(), now);
     }
   }
 
+  public Pay savePay(Pay pay) {
+    try {
+      if (pay.getCoupon() != null && pay.getCoupon().getId_coupon() != null) {
+        if (!pay.getCoupon().getExpiration_date().isAfter(LocalDate.now())) {
+          throw new IllegalArgumentException("Expiration Date not valid");
+        }
+      }
+      return payRepository.save(pay);
+    } catch (Exception e) {
+      throw new RuntimeException("Error saving pay: " + e.getMessage(), e);
+    }
+  }
+
   @Transactional
   public void transferPay(Pay pay, Integer idPedido) {
-    final Long idBill = 0L;
     try {
-      Pay successPay = payRepository.save(pay);
+      Pay successPay = savePay(pay);  
       System.out.println(successPay);
-      payRepository.insertBill(idBill, successPay.getId_pay(), idPedido);
+      payRepository.insertBill(successPay.getId_pay(), idPedido);
       handleCoupon(successPay);
     } catch (DataAccessException dae) {
       throw new RuntimeException("Error de base de datos al realizar la transaccion de pago " + dae.getMessage());
@@ -49,10 +62,6 @@ public class PayService {
 
   public List<Pay> getAll() {
     return payRepository.findAll();
-  }
-
-  public Pay savePay(Pay pay) {
-    return payRepository.save(pay);
   }
 
   public void deletePay(Long id) {

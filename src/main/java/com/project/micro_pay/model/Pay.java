@@ -12,8 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -49,6 +51,7 @@ public class Pay {
 
   private Float total_amount;
 
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private LocalDate date_pay;
 
   @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
@@ -58,4 +61,11 @@ public class Pay {
   @OneToOne(mappedBy = "idPay", cascade = CascadeType.ALL)
   @JsonIgnore
   private Bill bill;
+
+  @PrePersist
+  public void PrePersist() {
+    if (date_pay == null) {
+      date_pay = LocalDate.now();
+    }
+  }
 }

@@ -15,8 +15,8 @@ public interface PayRepository extends JpaRepository<Pay, Long> {
   // crear factura
   @Modifying
   @Transactional
-  @Query(value = "INSERT INTO schemagrupo5.bill (cod_bill, id_pay, id_pedido) VALUES (:cod_bill, :id_pay, :id_pedido)", nativeQuery = true)
-  void insertBill(@Param("cod_bill") Long cod_bill, @Param("id_pay") Long id_pay, @Param("id_pedido") Integer id_pedido);
+  @Query(value = "INSERT INTO schemagrupo5.bill (id_pay, id_pedido) VALUES (:id_pay, :id_pedido)", nativeQuery = true)
+  void insertBill(@Param("id_pay") Long id_pay, @Param("id_pedido") Integer id_pedido);
 
   // cambiar estado de coupon si es ingresado
   @Transactional
