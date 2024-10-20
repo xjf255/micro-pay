@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.micro_pay.DTO.PayRequestDTO;
 import com.project.micro_pay.model.Pay;
 import com.project.micro_pay.service.PayService;
 
@@ -54,9 +55,14 @@ public class PayController {
   }
 
   @PostMapping()
-  public Pay createPay(@RequestBody Pay pay) {
-    return payService.savePay(pay);
+  public void create(@RequestBody PayRequestDTO payRequestDTO){
+    payService.transferPay(payRequestDTO.getPay(), payRequestDTO.getIdPedido());
   }
+
+  // @PostMapping()
+  // public Pay createPay(@RequestBody Pay pay) {
+  //   return payService.savePay(pay);
+  // }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deletePay(@PathVariable Long id) {
