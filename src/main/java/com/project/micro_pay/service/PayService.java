@@ -46,7 +46,6 @@ public class PayService {
   public void transferPay(Pay pay, Integer idPedido) {
     try {
       Pay successPay = savePay(pay);  
-      System.out.println(successPay);
       payRepository.insertBill(successPay.getId_pay(), idPedido);
       handleCoupon(successPay);
     } catch (DataAccessException dae) {

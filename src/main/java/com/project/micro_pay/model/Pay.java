@@ -37,7 +37,7 @@ public class Pay {
   @JoinColumn(name = "id_coupon", nullable = true)
   private Coupon coupon;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "cod_method", nullable = false)
   private PayMethod payMethod;
 
