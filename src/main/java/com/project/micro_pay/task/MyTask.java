@@ -17,7 +17,7 @@ public class MyTask {
     LocalDate day = LocalDate.now(); 
     final Long idStatusExpiration = 6L;
     final Long idStatusAvailable = 4L;
-    String query = "update coupon set id_status = ? where coupon.expiration_date <= ? & coupon.id_status = ?";
+    String query = "update coupon set id_status = ? where coupon.expiration_date <= ? and coupon.id_status = ?";
     int rowAffected = jdbcTemplate.update(query, idStatusExpiration,day, idStatusAvailable);
     if(rowAffected != 0 ) System.out.println("Coupones actualizados " + rowAffected);
   }
