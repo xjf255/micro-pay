@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,7 +29,7 @@ public class Tax {
   private String name;
   private Float percentage;
 
-  @OneToOne(mappedBy = "tax",cascade = CascadeType.PERSIST)
+  @OneToMany(mappedBy = "tax",cascade = CascadeType.PERSIST)
   @JsonIgnore
-  private Pay pay;
+  private List<Pay> pay;
 }

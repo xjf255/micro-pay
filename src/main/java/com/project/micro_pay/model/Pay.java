@@ -41,7 +41,7 @@ public class Pay {
   @JoinColumn(name = "cod_method", nullable = false)
   private PayMethod payMethod;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "cod_tax", nullable = true)
   private Tax tax;
 

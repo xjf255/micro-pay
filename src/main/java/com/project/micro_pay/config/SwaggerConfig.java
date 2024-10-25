@@ -24,8 +24,8 @@ public class SwaggerConfig {
 		.apis(RequestHandlerSelectors.any())
 		.paths(PathSelectors.any())
 		.build()
-		// .pathMapping("/grupo5")  // Establecer el mapeo cuándo se pase al servidor
-		// .useDefaultResponseMessages(false);
+		//.pathMapping("/grupo5")  // Establecer el mapeo cuándo se pase al servidor
+		//.useDefaultResponseMessages(false);
 		.pathMapping("/")  // Establecer el mapeo cuándo sea local
 		.apiInfo(getApiInfo());
 	}
